@@ -80,7 +80,8 @@ public class StoreFormController {
 			
 		}
 		
-		List<InventoryStoreRoleRelation> storeRelation = inventoryService.listOfRoleRelationStore(Integer.parseInt(storeId));
+		//List<InventoryStoreRoleRelation> storeRelation = inventoryService.listOfRoleRelationStore(Integer.parseInt(storeId));
+		List<InventoryStoreRoleRelation> storeRelation = inventoryService.listOfRoleRelationStore(NumberUtils.toInt(storeId));
 		model.addAttribute("selectedModule", storeRelation);
 
 		List<Role> roles = Context.getUserService().getAllRoles();
@@ -173,7 +174,7 @@ public class StoreFormController {
 		for (InventoryStoreRoleRelation rl : roleRelation) {
 			inventoryService.deleteStoreRole(rl);
 		}
-	
+
 			if(value==0)
 				
 				{ 	
