@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.ehrinventory.db;
+package org.openmrs.module.ehrinventory.api.db;
 
 import org.hibernate.SessionFactory;
 import org.openmrs.Encounter;

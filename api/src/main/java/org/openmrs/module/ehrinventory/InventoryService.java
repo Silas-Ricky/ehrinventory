@@ -16,9 +16,39 @@ package org.openmrs.module.ehrinventory;
 import org.openmrs.Encounter;
 import org.openmrs.Role;
 import org.openmrs.api.APIException;
-import org.openmrs.api.OpenmrsService;
-import org.openmrs.module.hospitalcore.model.*;
-import org.openmrs.module.ehrinventory.model.*;
+import org.openmrs.api.OpenmrsService;;
+import org.openmrs.module.ehrinventory.model.InventoryItem;
+import org.openmrs.module.ehrinventory.model.InventoryItemCategory;
+import org.openmrs.module.ehrinventory.model.InventoryItemSpecification;
+import org.openmrs.module.ehrinventory.model.InventoryItemSubCategory;
+import org.openmrs.module.ehrinventory.model.InventoryItemUnit;
+import org.openmrs.module.ehrinventory.model.InventoryStoreDrug;
+import org.openmrs.module.ehrinventory.model.InventoryStoreDrugAccount;
+import org.openmrs.module.ehrinventory.model.InventoryStoreDrugAccountDetail;
+import org.openmrs.module.ehrinventory.model.InventoryStoreDrugIndentDetail;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItem;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemAccount;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemAccountDetail;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemIndent;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemIndentDetail;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemPatient;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemPatientDetail;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemTransaction;
+import org.openmrs.module.ehrinventory.model.InventoryStoreItemTransactionDetail;
+import org.openmrs.module.ehrinventory.model.ToxoidModel;
+import org.openmrs.module.hospitalcore.model.InventoryDrug;
+import org.openmrs.module.hospitalcore.model.InventoryDrugCategory;
+import org.openmrs.module.hospitalcore.model.InventoryDrugFormulation;
+import org.openmrs.module.hospitalcore.model.InventoryDrugUnit;
+import org.openmrs.module.hospitalcore.model.InventoryStore;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugIndent;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatient;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugPatientDetail;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransaction;
+import org.openmrs.module.hospitalcore.model.InventoryStoreDrugTransactionDetail;
+import org.openmrs.module.hospitalcore.model.InventoryStoreRoleRelation;
+import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
+import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -269,7 +299,7 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreDrug> listStoreDrug(Integer storeId, Integer categoryId, String drugName, Integer reorderQty,
-	                                              int min, int max) throws APIException;
+												  int min, int max) throws APIException;
 	
 	public int countStoreDrug(Integer storeId, Integer categoryId, String drugName, Integer reorderQty) throws APIException;
 	
@@ -285,8 +315,8 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreDrugTransaction> listStoreDrugTransaction(Integer transactionType, Integer storeId,
-	                                                                    String description, String fromDate, String toDate,
-	                                                                    int min, int max) throws APIException;
+																		String description, String fromDate, String toDate,
+																		int min, int max) throws APIException;
 	
 	@Transactional(readOnly = false)
 	public InventoryStoreDrugTransaction saveStoreDrugTransaction(InventoryStoreDrugTransaction storeTransaction)
@@ -304,9 +334,9 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreDrugTransactionDetail> listStoreDrugTransactionDetail(Integer storeId, Integer categoryId,
-	                                                                                String drugName, String formulationName,
-	                                                                                String fromDate, String toDate, int min,
-	                                                                                int max) throws APIException;
+																					String drugName, String formulationName,
+																					String fromDate, String toDate, int min,
+																					int max) throws APIException;
 	
 	@Transactional(readOnly = false)
 	public InventoryStoreDrugTransactionDetail saveStoreDrugTransactionDetail(InventoryStoreDrugTransactionDetail storeTransactionDetail)
@@ -349,7 +379,7 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreDrugIndent> listStoreDrugIndent(Integer StoreId, String name, String fromDate, String toDate,
-	                                                          int min, int max) throws APIException;
+															  int min, int max) throws APIException;
 	
 	public int countStoreDrugIndent(Integer StoreId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -376,8 +406,8 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreDrugIndentDetail> listStoreDrugIndentDetail(Integer storeId, Integer categoryId,
-	                                                                      String indentName, String drugName,
-	                                                                      String fromDate, String toDate, int min, int max)
+																		  String indentName, String drugName,
+																		  String fromDate, String toDate, int min, int max)
 	                                                                                                                       throws APIException;
 	
 	public List<InventoryStoreDrugIndentDetail> listStoreDrugIndentDetail(Integer indentId) throws APIException;
@@ -397,7 +427,7 @@ public interface InventoryService extends OpenmrsService {
 	 * InventoryStoreDrugPatient
 	 */
 	public List<InventoryStoreDrugPatient> listStoreDrugPatient(Integer storeId, Integer receiptId, String name, String fromDate,
-	                                                            String toDate, int min, int max) throws APIException;
+																String toDate, int min, int max) throws APIException;
 	
 	public int countStoreDrugPatient(Integer storeId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -424,7 +454,7 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreItem> listStoreItem(Integer storeId, Integer categoryId, String itemName, Integer reorderQty,
-	                                              int min, int max) throws APIException;
+												  int min, int max) throws APIException;
 	
 	public int countStoreItem(Integer storeId, Integer categoryId, String itemName, Integer reorderQty) throws APIException;
 	
@@ -440,8 +470,8 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreItemTransaction> listStoreItemTransaction(Integer transactionType, Integer storeId,
-	                                                                    String description, String fromDate, String toDate,
-	                                                                    int min, int max) throws APIException;
+																		String description, String fromDate, String toDate,
+																		int min, int max) throws APIException;
 	
 	@Transactional(readOnly = false)
 	public InventoryStoreItemTransaction saveStoreItemTransaction(InventoryStoreItemTransaction storeTransaction)
@@ -459,10 +489,10 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreItemTransactionDetail> listStoreItemTransactionDetail(Integer storeId, Integer categoryId,
-	                                                                                String itemName,
-	                                                                                String specificationName,
-	                                                                                String fromDate, String toDate, int min,
-	                                                                                int max) throws APIException;
+																					String itemName,
+																					String specificationName,
+																					String fromDate, String toDate, int min,
+																					int max) throws APIException;
 	
 	@Transactional(readOnly = false)
 	public InventoryStoreItemTransactionDetail saveStoreItemTransactionDetail(InventoryStoreItemTransactionDetail storeTransactionDetail)
@@ -506,7 +536,7 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreItemIndent> listStoreItemIndent(Integer StoreId, String name, String fromDate, String toDate,
-	                                                          int min, int max) throws APIException;
+															  int min, int max) throws APIException;
 	
 	public int countStoreItemIndent(Integer StoreId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -534,8 +564,8 @@ public interface InventoryService extends OpenmrsService {
 	 */
 	
 	public List<InventoryStoreItemIndentDetail> listStoreItemIndentDetail(Integer storeId, Integer categoryId,
-	                                                                      String indentName, String itemName,
-	                                                                      String fromDate, String toDate, int min, int max)
+																		  String indentName, String itemName,
+																		  String fromDate, String toDate, int min, int max)
 	                                                                                                                       throws APIException;
 	
 	public int countStoreItemIndentDetail(Integer storeId, Integer categoryId, String indentName, String itemName,
@@ -555,7 +585,7 @@ public interface InventoryService extends OpenmrsService {
 	 * InventoryStoreItemAccount
 	 */
 	public List<InventoryStoreItemAccount> listStoreItemAccount(Integer storeId, String name, String fromDate,
-	                                                            String toDate, int min, int max) throws APIException;
+																String toDate, int min, int max) throws APIException;
 	
 	public int countStoreItemAccount(Integer storeId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -580,7 +610,7 @@ public interface InventoryService extends OpenmrsService {
 	 * InventoryStoreDrugAccount
 	 */
 	public List<InventoryStoreDrugAccount> listStoreDrugAccount(Integer storeId, String name, String fromDate,
-	                                                            String toDate, int min, int max) throws APIException;
+																String toDate, int min, int max) throws APIException;
 	
 	public int countStoreDrugAccount(Integer storeId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -602,7 +632,7 @@ public interface InventoryService extends OpenmrsService {
 	public InventoryStoreDrugAccountDetail getStoreDrugAccountDetailById(Integer id) throws APIException;
 	
 	//ghanshyam 15-june-2013 New Requirement #1636 User is able to see and dispense drugs in patient queue for issuing drugs, as ordered from dashboard
-	public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page) throws APIException;
+	public List<PatientSearch> searchListOfPatient(Date date, String searchKey, int page) throws APIException;
         
         // to work with size Selector
 	public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page,int pgSize) throws APIException;
@@ -610,7 +640,7 @@ public interface InventoryService extends OpenmrsService {
         // to work with size Selector
 	public int countSearchListOfPatient(Date date, String searchKey,int page) throws APIException;
         
-	public List<OpdDrugOrder> listOfOrder(Integer patientId,Date date) throws APIException;
+	public List<OpdDrugOrder> listOfOrder(Integer patientId, Date date) throws APIException;
 	
 	public List<OpdDrugOrder> listOfDrugOrder(Integer patientId, Integer encounterId) throws APIException;
 	
@@ -619,8 +649,8 @@ public interface InventoryService extends OpenmrsService {
 	/**
 	 * InventoryStoreItemPatient
 	 */
-	public List<InventoryStoreItemPatient> listStoreItemPatient(Integer storeId, Integer receiptId,  String name, String fromDate,
-	                                                            String toDate, int min, int max) throws APIException;
+	public List<InventoryStoreItemPatient> listStoreItemPatient(Integer storeId, Integer receiptId, String name, String fromDate,
+																String toDate, int min, int max) throws APIException;
 	
 	public int countStoreItemPatient(Integer storeId, String name, String fromDate, String toDate) throws APIException;
 	
@@ -643,7 +673,7 @@ public interface InventoryService extends OpenmrsService {
 	
 	public List<OpdDrugOrder> listOfNotDispensedOrder(Integer patientId,Date date,Encounter encounterId ) throws APIException;
 	
-	public List<InventoryStoreRoleRelation> listOfRoleRelation(Integer id,String role) throws APIException;
+	public List<InventoryStoreRoleRelation> listOfRoleRelation(Integer id, String role) throws APIException;
 	public List<InventoryStoreRoleRelation> listInventoryStoreRole() throws APIException;
 	public InventoryStoreRoleRelation saveStores(InventoryStoreRoleRelation role) throws APIException;
 

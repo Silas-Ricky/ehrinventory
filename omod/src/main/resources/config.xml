@@ -25,6 +25,10 @@
 		<point>org.openmrs.admin.list</point>
 		<class>org.openmrs.module.ehrinventory.extension.html.AdminList</class>
 	</extension>
+	<!--<extension>
+		<point>org.openmrs.gutter.tools</point>
+		<class>org.openmrs.module.ehrinventory.extension.html.InventoryHeader</class>
+	</extension>-->
 
 	
 	<!-- AOP

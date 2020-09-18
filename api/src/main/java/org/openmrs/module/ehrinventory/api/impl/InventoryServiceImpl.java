@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.ehrinventory.impl;
+package org.openmrs.module.ehrinventory.api.impl;
 
 import org.openmrs.Encounter;
 import org.openmrs.Role;
@@ -32,7 +32,7 @@ import org.openmrs.module.hospitalcore.model.InventoryStoreRoleRelation;
 import org.openmrs.module.hospitalcore.model.OpdDrugOrder;
 import org.openmrs.module.hospitalcore.model.PatientSearch;
 import org.openmrs.module.ehrinventory.InventoryService;
-import org.openmrs.module.ehrinventory.db.InventoryDAO;
+import org.openmrs.module.ehrinventory.api.db.InventoryDAO;
 import org.openmrs.module.ehrinventory.model.InventoryItem;
 import org.openmrs.module.ehrinventory.model.InventoryItemCategory;
 import org.openmrs.module.ehrinventory.model.InventoryItemSpecification;
@@ -65,57 +65,57 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	public InventoryServiceImpl() {
 	}
 	
-	protected InventoryDAO dao;
+	protected InventoryDAO inventoryDAO;
 	
-	public void setDao(InventoryDAO dao) {
-		this.dao = dao;
+	public void setInventoryDAO(InventoryDAO inventoryDAO) {
+		this.inventoryDAO = inventoryDAO;
 	}
 	
 	/**
 	 * STORE
 	 */
 	public List<InventoryStore> listInventoryStore(int min, int max) throws APIException {
-		return dao.listInventoryStore(min, max);
+		return inventoryDAO.listInventoryStore(min, max);
 	}
 	
 	public InventoryStore saveStore(InventoryStore store) throws APIException {
-		return dao.saveStore(store);
+		return inventoryDAO.saveStore(store);
 	}
 	
 	public int countListStore() throws APIException {
-		return dao.countListStore();
+		return inventoryDAO.countListStore();
 	}
 	
 	public InventoryStore getStoreById(Integer id) throws APIException {
-		return dao.getStoreById(id);
+		return inventoryDAO.getStoreById(id);
 	}
 	
 	public InventoryStore getStoreByRole(String role) throws APIException {
-		return dao.getStoreByRole(role);
+		return inventoryDAO.getStoreByRole(role);
 	}
 	
 	public InventoryStore getStoreByCollectionRole(List<Role> roles) throws APIException {
-		return dao.getStoreByCollectionRole(roles);
+		return inventoryDAO.getStoreByCollectionRole(roles);
 	}
 	
 	public List<InventoryStore> listMainStore() throws APIException {
-		return dao.listMainStore();
+		return inventoryDAO.listMainStore();
 	}
 	
 	public void deleteStore(InventoryStore store) throws APIException {
-		dao.deleteStore(store);
+		inventoryDAO.deleteStore(store);
 	}
 	
 	public List<InventoryStore> listAllInventoryStore() throws APIException {
-		return dao.listAllInventoryStore();
+		return inventoryDAO.listAllInventoryStore();
 	}
 	
 	public InventoryStore getStoreByName(String name) throws APIException {
-		return dao.getStoreByName(name);
+		return inventoryDAO.getStoreByName(name);
 	}
 	
 	public List<InventoryStore> listStoreByMainStore(Integer mainStoreid, boolean bothMainStore) throws APIException {
-		return dao.listStoreByMainStore(mainStoreid, bothMainStore);
+		return inventoryDAO.listStoreByMainStore(mainStoreid, bothMainStore);
 	}
 	
 	/**
@@ -123,31 +123,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryItemCategory> listItemCategory(String name, int min, int max) throws APIException {
-		return dao.listItemCategory(name, min, max);
+		return inventoryDAO.listItemCategory(name, min, max);
 	}
 	
 	public List<InventoryItemCategory> findItemCategory(String name) throws APIException {
-		return dao.findItemCategory(name);
+		return inventoryDAO.findItemCategory(name);
 	}
 	
 	public InventoryItemCategory saveItemCategory(InventoryItemCategory category) throws APIException {
-		return dao.saveItemCategory(category);
+		return inventoryDAO.saveItemCategory(category);
 	}
 	
 	public int countListItemCategory(String name) throws APIException {
-		return dao.countListItemCategory(name);
+		return inventoryDAO.countListItemCategory(name);
 	}
 	
 	public InventoryItemCategory getItemCategoryById(Integer id) throws APIException {
-		return dao.getItemCategoryById(id);
+		return inventoryDAO.getItemCategoryById(id);
 	}
 	
 	public InventoryItemCategory getItemCategoryByName(String name) throws APIException {
-		return dao.getItemCategoryByName(name);
+		return inventoryDAO.getItemCategoryByName(name);
 	}
 	
 	public void deleteItemCategory(InventoryItemCategory category) throws APIException {
-		dao.deleteItemCategory(category);
+		inventoryDAO.deleteItemCategory(category);
 	}
 	
 	/**
@@ -155,35 +155,35 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryItemSubCategory> listItemSubCategory(String name, int min, int max) throws APIException {
-		return dao.listItemSubCategory(name, min, max);
+		return inventoryDAO.listItemSubCategory(name, min, max);
 	}
 	
 	public List<InventoryItemSubCategory> findItemSubCategory(String name) throws APIException {
-		return dao.findItemSubCategory(name);
+		return inventoryDAO.findItemSubCategory(name);
 	}
 	
 	public InventoryItemSubCategory saveItemSubCategory(InventoryItemSubCategory subCategory) throws APIException {
-		return dao.saveItemSubCategory(subCategory);
+		return inventoryDAO.saveItemSubCategory(subCategory);
 	}
 	
 	public int countListItemSubCategory(String name) throws APIException {
-		return dao.countListItemSubCategory(name);
+		return inventoryDAO.countListItemSubCategory(name);
 	}
 	
 	public InventoryItemSubCategory getItemSubCategoryById(Integer id) throws APIException {
-		return dao.getItemSubCategoryById(id);
+		return inventoryDAO.getItemSubCategoryById(id);
 	}
 	
 	public InventoryItemSubCategory getItemSubCategoryByName(Integer categoryId, String name) throws APIException {
-		return dao.getItemSubCategoryByName(categoryId, name);
+		return inventoryDAO.getItemSubCategoryByName(categoryId, name);
 	}
 	
 	public void deleteItemSubCategory(InventoryItemSubCategory subCategory) throws APIException {
-		dao.deleteItemSubCategory(subCategory);
+		inventoryDAO.deleteItemSubCategory(subCategory);
 	}
 	
 	public List<InventoryItemSubCategory> listSubCatByCat(Integer categoryId) throws APIException {
-		return dao.listSubCatByCat(categoryId);
+		return inventoryDAO.listSubCatByCat(categoryId);
 	}
 	
 	/**
@@ -191,31 +191,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryItemSpecification> listItemSpecification(String name, int min, int max) throws APIException {
-		return dao.listItemSpecification(name, min, max);
+		return inventoryDAO.listItemSpecification(name, min, max);
 	}
 	
 	public List<InventoryItemSpecification> findItemSpecification(String name) throws APIException {
-		return dao.findItemSpecification(name);
+		return inventoryDAO.findItemSpecification(name);
 	}
 	
 	public InventoryItemSpecification saveItemSpecification(InventoryItemSpecification specification) throws APIException {
-		return dao.saveItemSpecification(specification);
+		return inventoryDAO.saveItemSpecification(specification);
 	}
 	
 	public int countListItemSpecification(String name) throws APIException {
-		return dao.countListItemSpecification(name);
+		return inventoryDAO.countListItemSpecification(name);
 	}
 	
 	public InventoryItemSpecification getItemSpecificationById(Integer id) throws APIException {
-		return dao.getItemSpecificationById(id);
+		return inventoryDAO.getItemSpecificationById(id);
 	}
 	
 	public InventoryItemSpecification getItemSpecificationByName(String name) throws APIException {
-		return dao.getItemSpecificationByName(name);
+		return inventoryDAO.getItemSpecificationByName(name);
 	}
 	
 	public void deleteItemSpecification(InventoryItemSpecification specification) throws APIException {
-		dao.deleteItemSpecification(specification);
+		inventoryDAO.deleteItemSpecification(specification);
 	}
 	
 	/**
@@ -223,31 +223,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryItemUnit> listItemUnit(String name, int min, int max) throws APIException {
-		return dao.listItemUnit(name, min, max);
+		return inventoryDAO.listItemUnit(name, min, max);
 	}
 	
 	public List<InventoryItemUnit> findItemUnit(String name) throws APIException {
-		return dao.findItemUnit(name);
+		return inventoryDAO.findItemUnit(name);
 	}
 	
 	public InventoryItemUnit saveItemUnit(InventoryItemUnit unit) throws APIException {
-		return dao.saveItemUnit(unit);
+		return inventoryDAO.saveItemUnit(unit);
 	}
 	
 	public int countListItemUnit(String name) throws APIException {
-		return dao.countListItemUnit(name);
+		return inventoryDAO.countListItemUnit(name);
 	}
 	
 	public InventoryItemUnit getItemUnitById(Integer id) throws APIException {
-		return dao.getItemUnitById(id);
+		return inventoryDAO.getItemUnitById(id);
 	}
 	
 	public InventoryItemUnit getItemUnitByName(String name) throws APIException {
-		return dao.getItemUnitByName(name);
+		return inventoryDAO.getItemUnitByName(name);
 	}
 	
 	public void deleteItemUnit(InventoryItemUnit unit) throws APIException {
-		dao.deleteItemUnit(unit);
+		inventoryDAO.deleteItemUnit(unit);
 	}
 	
 	/**
@@ -255,40 +255,40 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryItem> listItem(Integer categoryId, String name, int min, int max) throws APIException {
-		return dao.listItem(categoryId, name, min, max);
+		return inventoryDAO.listItem(categoryId, name, min, max);
 	}
 	
 	public List<InventoryItem> findItem(String name) throws APIException {
-		return dao.findItem(name);
+		return inventoryDAO.findItem(name);
 	}
 	
 	public InventoryItem saveItem(InventoryItem item) throws APIException {
-		return dao.saveItem(item);
+		return inventoryDAO.saveItem(item);
 	}
 	
 	public int countListItem(Integer categoryId, String name) throws APIException {
-		return dao.countListItem(categoryId, name);
+		return inventoryDAO.countListItem(categoryId, name);
 	}
 	
 	public InventoryItem getItemById(Integer id) throws APIException {
-		return dao.getItemById(id);
+		return inventoryDAO.getItemById(id);
 	}
 	
 	public InventoryItem getItemByName(String name) throws APIException {
-		return dao.getItemByName(name);
+		return inventoryDAO.getItemByName(name);
 	}
 	
 	public void deleteItem(InventoryItem item) throws APIException {
-		dao.deleteItem(item);
+		inventoryDAO.deleteItem(item);
 	}
 	
 	public List<InventoryItem> findItem(Integer categoryId, String name) throws APIException {
-		return dao.findItem(categoryId, name);
+		return inventoryDAO.findItem(categoryId, name);
 	}
 	
 	public int countItem(Integer categoryId, Integer unitId, Integer subCategoryId, Integer specificationId)
 	                                                                                                        throws DAOException {
-		return dao.countItem(categoryId, unitId, subCategoryId, specificationId);
+		return inventoryDAO.countItem(categoryId, unitId, subCategoryId, specificationId);
 	}
 	
 	/**
@@ -296,41 +296,41 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryDrug> listDrug(Integer categoryId, String name, int min, int max) throws APIException {
-		return dao.listDrug(categoryId, name, min, max);
+		return inventoryDAO.listDrug(categoryId, name, min, max);
 	}
 	
 	public List<InventoryDrug> findDrug(Integer categoryId, String name) throws APIException {
-		return dao.findDrug(categoryId, name);
+		return inventoryDAO.findDrug(categoryId, name);
 	}
 	
 	public InventoryDrug saveDrug(InventoryDrug drug) throws APIException {
-		return dao.saveDrug(drug);
+		return inventoryDAO.saveDrug(drug);
 	}
 	
 	public int countListDrug(Integer categoryId, String name) throws APIException {
-		return dao.countListDrug(categoryId, name);
+		return inventoryDAO.countListDrug(categoryId, name);
 	}
 	
 	public InventoryDrug getDrugById(Integer id) throws APIException {
-		return dao.getDrugById(id);
+		return inventoryDAO.getDrugById(id);
 	}
 	
 	public InventoryDrug getDrugByName(String name) throws APIException {
-		return dao.getDrugByName(name);
+		return inventoryDAO.getDrugByName(name);
 	}
 	
 	public void deleteDrug(InventoryDrug drug) throws APIException {
-		dao.deleteDrug(drug);
+		inventoryDAO.deleteDrug(drug);
 	}
 	
 	public List<InventoryDrug> getAllDrug() throws APIException {
-		return dao.getAllDrug();
+		return inventoryDAO.getAllDrug();
 	}
 	
 	@Override
 	public int countListDrug(Integer categoryId, Integer unitId, Integer formulationId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.countListDrug(categoryId, unitId, formulationId);
+		return inventoryDAO.countListDrug(categoryId, unitId, formulationId);
 	}
 	
 	/**
@@ -338,31 +338,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryDrugCategory> listDrugCategory(String name, int min, int max) throws APIException {
-		return dao.listDrugCategory(name, min, max);
+		return inventoryDAO.listDrugCategory(name, min, max);
 	}
 	
 	public List<InventoryDrugCategory> findDrugCategory(String name) throws APIException {
-		return dao.findDrugCategory(name);
+		return inventoryDAO.findDrugCategory(name);
 	}
 	
 	public InventoryDrugCategory saveDrugCategory(InventoryDrugCategory drugCategory) throws APIException {
-		return dao.saveDrugCategory(drugCategory);
+		return inventoryDAO.saveDrugCategory(drugCategory);
 	}
 	
 	public int countListDrugCategory(String name) throws APIException {
-		return dao.countListDrugCategory(name);
+		return inventoryDAO.countListDrugCategory(name);
 	}
 	
 	public InventoryDrugCategory getDrugCategoryById(Integer id) throws APIException {
-		return dao.getDrugCategoryById(id);
+		return inventoryDAO.getDrugCategoryById(id);
 	}
 	
 	public InventoryDrugCategory getDrugCategoryByName(String name) throws APIException {
-		return dao.getDrugCategoryByName(name);
+		return inventoryDAO.getDrugCategoryByName(name);
 	}
 	
 	public void deleteDrugCategory(InventoryDrugCategory drugCategory) throws APIException {
-		dao.deleteDrugCategory(drugCategory);
+		inventoryDAO.deleteDrugCategory(drugCategory);
 	}
 	
 	/**
@@ -370,35 +370,35 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryDrugFormulation> listDrugFormulation(String name, int min, int max) throws APIException {
-		return dao.listDrugFormulation(name, min, max);
+		return inventoryDAO.listDrugFormulation(name, min, max);
 	}
 	
 	public List<InventoryDrugFormulation> findDrugFormulation(String name) throws APIException {
-		return dao.findDrugFormulation(name);
+		return inventoryDAO.findDrugFormulation(name);
 	}
 	
 	public InventoryDrugFormulation saveDrugFormulation(InventoryDrugFormulation drugFormulation) throws APIException {
-		return dao.saveDrugFormulation(drugFormulation);
+		return inventoryDAO.saveDrugFormulation(drugFormulation);
 	}
 	
 	public int countListDrugFormulation(String name) throws APIException {
-		return dao.countListDrugFormulation(name);
+		return inventoryDAO.countListDrugFormulation(name);
 	}
 	
 	public InventoryDrugFormulation getDrugFormulationById(Integer id) throws APIException {
-		return dao.getDrugFormulationById(id);
+		return inventoryDAO.getDrugFormulationById(id);
 	}
 	
 	public InventoryDrugFormulation getDrugFormulationByName(String name) throws APIException {
-		return dao.getDrugFormulationByName(name);
+		return inventoryDAO.getDrugFormulationByName(name);
 	}
 	
 	public InventoryDrugFormulation getDrugFormulation(String name, String dozage) throws APIException {
-		return dao.getDrugFormulation(name, dozage);
+		return inventoryDAO.getDrugFormulation(name, dozage);
 	}
 	
 	public void deleteDrugFormulation(InventoryDrugFormulation drugFormulation) throws APIException {
-		dao.deleteDrugFormulation(drugFormulation);
+		inventoryDAO.deleteDrugFormulation(drugFormulation);
 	}
 	
 	/**
@@ -406,31 +406,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	
 	public List<InventoryDrugUnit> listDrugUnit(String name, int min, int max) throws APIException {
-		return dao.listDrugUnit(name, min, max);
+		return inventoryDAO.listDrugUnit(name, min, max);
 	}
 	
 	public List<InventoryDrugUnit> findDrugUnit(String name) throws APIException {
-		return dao.findDrugUnit(name);
+		return inventoryDAO.findDrugUnit(name);
 	}
 	
 	public InventoryDrugUnit saveDrugUnit(InventoryDrugUnit drugUnit) throws APIException {
-		return dao.saveDrugUnit(drugUnit);
+		return inventoryDAO.saveDrugUnit(drugUnit);
 	}
 	
 	public int countListDrugUnit(String name) throws APIException {
-		return dao.countListDrugUnit(name);
+		return inventoryDAO.countListDrugUnit(name);
 	}
 	
 	public InventoryDrugUnit getDrugUnitById(Integer id) throws APIException {
-		return dao.getDrugUnitById(id);
+		return inventoryDAO.getDrugUnitById(id);
 	}
 	
 	public InventoryDrugUnit getDrugUnitByName(String name) throws APIException {
-		return dao.getDrugUnitByName(name);
+		return inventoryDAO.getDrugUnitByName(name);
 	}
 	
 	public void deleteDrugUnit(InventoryDrugUnit drugUnit) throws APIException {
-		dao.deleteDrugUnit(drugUnit);
+		inventoryDAO.deleteDrugUnit(drugUnit);
 	}
 	
 	/**
@@ -439,23 +439,23 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	
 	public List<InventoryStoreDrug> listStoreDrug(Integer storeId, Integer categoryId, String drugName, Integer reOrderQty,
 	                                              int min, int max) throws APIException {
-		return dao.listStoreDrug(storeId, categoryId, drugName, reOrderQty, min, max);
+		return inventoryDAO.listStoreDrug(storeId, categoryId, drugName, reOrderQty, min, max);
 	}
 	
 	public int countStoreDrug(Integer storeId, Integer categoryId, String drugName, Integer reOrderQty) throws APIException {
-		return dao.countStoreDrug(storeId, categoryId, drugName, reOrderQty);
+		return inventoryDAO.countStoreDrug(storeId, categoryId, drugName, reOrderQty);
 	}
 	
 	public InventoryStoreDrug getStoreDrugById(Integer id) throws APIException {
-		return dao.getStoreDrugById(id);
+		return inventoryDAO.getStoreDrugById(id);
 	}
 	
 	public InventoryStoreDrug getStoreDrug(Integer storeId, Integer drugId, Integer formulationId) throws APIException {
-		return dao.getStoreDrug(storeId, drugId, formulationId);
+		return inventoryDAO.getStoreDrug(storeId, drugId, formulationId);
 	}
 	
 	public InventoryStoreDrug saveStoreDrug(InventoryStoreDrug storeDrug) throws APIException {
-		return dao.saveStoreDrug(storeDrug);
+		return inventoryDAO.saveStoreDrug(storeDrug);
 	}
 	
 	/**
@@ -465,26 +465,26 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	public List<InventoryStoreDrugTransaction> listStoreDrugTransaction(Integer transactionType, Integer storeId,
 	                                                                    String description, String fromDate, String toDate,
 	                                                                    int min, int max) throws APIException {
-		return dao.listStoreDrugTransaction(transactionType, storeId, description, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreDrugTransaction(transactionType, storeId, description, fromDate, toDate, min, max);
 	}
 	
 	public InventoryStoreDrugTransaction saveStoreDrugTransaction(InventoryStoreDrugTransaction storeTransaction)
 	                                                                                                             throws APIException {
-		return dao.saveStoreDrugTransaction(storeTransaction);
+		return inventoryDAO.saveStoreDrugTransaction(storeTransaction);
 	}
 	
 	public int countStoreDrugTransaction(Integer transactionType, Integer storeId, String description, String fromDate,
 	                                     String toDate) throws APIException {
-		return dao.countStoreDrugTransaction(transactionType, storeId, description, fromDate, toDate);
+		return inventoryDAO.countStoreDrugTransaction(transactionType, storeId, description, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugTransaction getStoreDrugTransactionById(Integer id) throws APIException {
-		return dao.getStoreDrugTransactionById(id);
+		return inventoryDAO.getStoreDrugTransactionById(id);
 	}
 	
 	@Override
 	public InventoryStoreDrugTransaction getStoreDrugTransactionByParentId(Integer parentId) throws APIException {
-		return dao.getStoreDrugTransactionByParentId(parentId);
+		return inventoryDAO.getStoreDrugTransactionByParentId(parentId);
 	}
 	
 	/**
@@ -495,34 +495,34 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                                String drugName, String formulationName,
 	                                                                                String fromDate, String toDate, int min,
 	                                                                                int max) throws APIException {
-		return dao
+		return inventoryDAO
 		        .listStoreDrugTransactionDetail(storeId, categoryId, drugName, formulationName, fromDate, toDate, min, max);
 	}
 	
 	public InventoryStoreDrugTransactionDetail saveStoreDrugTransactionDetail(InventoryStoreDrugTransactionDetail storeTransactionDetail)
 	                                                                                                                                     throws APIException {
-		return dao.saveStoreDrugTransactionDetail(storeTransactionDetail);
+		return inventoryDAO.saveStoreDrugTransactionDetail(storeTransactionDetail);
 	}
 	
 	public int countStoreDrugTransactionDetail(Integer storeId, Integer categoryId, String drugName, String formulationName,
 	                                           String fromDate, String toDate) throws APIException {
-		return dao.countStoreDrugTransactionDetail(storeId, categoryId, drugName, formulationName, fromDate, toDate);
+		return inventoryDAO.countStoreDrugTransactionDetail(storeId, categoryId, drugName, formulationName, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugTransactionDetail getStoreDrugTransactionDetailById(Integer id) throws APIException {
-		return dao.getStoreDrugTransactionDetailById(id);
+		return inventoryDAO.getStoreDrugTransactionDetailById(id);
 	}
 	
 	public List<InventoryStoreDrugTransactionDetail> listStoreDrugTransactionDetail(Integer storeId, Integer drugId,
 	                                                                                Integer formulationId,
 	                                                                                boolean haveQuantity)
 	                                                                                                     throws APIException {
-		return dao.listStoreDrugTransactionDetail(storeId, drugId, formulationId, haveQuantity);
+		return inventoryDAO.listStoreDrugTransactionDetail(storeId, drugId, formulationId, haveQuantity);
 	}
 	
 	@Override
 	public Integer sumCurrentQuantityDrugOfStore(Integer storeId, Integer drugId, Integer formulationId) throws APIException {
-		return dao.sumCurrentQuantityDrugOfStore(storeId, drugId, formulationId);
+		return inventoryDAO.sumCurrentQuantityDrugOfStore(storeId, drugId, formulationId);
 	}
 	
 	@Override
@@ -530,20 +530,20 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                       Collection<Integer> formulations)
 	                                                                                                        throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listStoreDrugAvaiable(storeId, drugs, formulations);
+		return inventoryDAO.listStoreDrugAvaiable(storeId, drugs, formulations);
 	}
 	
 	@Override
 	public List<InventoryStoreDrugTransactionDetail> listTransactionDetail(Integer transactionId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listTransactionDetail(transactionId);
+		return inventoryDAO.listTransactionDetail(transactionId);
 	}
 	
 	@Override
 	public Integer countViewStockBalance(Integer storeId, Integer categoryId, String drugName,String attribute, String fromDate,
 	                                     String toDate, boolean isExpiry) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.countViewStockBalance(storeId, categoryId, drugName, attribute, fromDate, toDate, isExpiry);
+		return inventoryDAO.countViewStockBalance(storeId, categoryId, drugName, attribute, fromDate, toDate, isExpiry);
 	}
 	
 	@Override
@@ -552,7 +552,7 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                      boolean isExpiry, int min, int max)
 	                                                                                                         throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listViewStockBalance(storeId, categoryId, drugName, attribute, fromDate, toDate, isExpiry, min, max);
+		return inventoryDAO.listViewStockBalance(storeId, categoryId, drugName, attribute, fromDate, toDate, isExpiry, min, max);
 	}
 	
 	@Override
@@ -560,13 +560,13 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                                Integer formulationId, Integer isExpriry)
 	                                                                                                                         throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listStoreDrugTransactionDetail(storeId, drugId, formulationId, isExpriry);
+		return inventoryDAO.listStoreDrugTransactionDetail(storeId, drugId, formulationId, isExpriry);
 	}
 	
 	@Override
 	public int checkExistDrugTransactionDetail(Integer drugId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.checkExistDrugTransactionDetail(drugId);
+		return inventoryDAO.checkExistDrugTransactionDetail(drugId);
 	}
 	
 	/**
@@ -575,44 +575,44 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	
 	public List<InventoryStoreDrugIndent> listSubStoreIndent(Integer storeId, String name, Integer status, String fromDate,
 	                                                         String toDate, int min, int max) throws APIException {
-		return dao.listSubStoreIndent(storeId, name, status, fromDate, toDate, min, max);
+		return inventoryDAO.listSubStoreIndent(storeId, name, status, fromDate, toDate, min, max);
 	}
 	
 	@Override
 	public List<InventoryStoreDrugIndent> listStoreDrugIndent(Integer StoreId, String name, String fromDate, String toDate,
 	                                                          int min, int max) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listStoreDrugIndent(StoreId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreDrugIndent(StoreId, name, fromDate, toDate, min, max);
 	}
 	
 	@Override
 	public int countStoreDrugIndent(Integer StoreId, String name, String fromDate, String toDate) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.countStoreDrugIndent(StoreId, name, fromDate, toDate);
+		return inventoryDAO.countStoreDrugIndent(StoreId, name, fromDate, toDate);
 	}
 	
 	public int countSubStoreIndent(Integer storeId, String name, Integer status, String fromDate, String toDate)
 	                                                                                                            throws APIException {
-		return dao.countSubStoreIndent(storeId, name, status, fromDate, toDate);
+		return inventoryDAO.countSubStoreIndent(storeId, name, status, fromDate, toDate);
 	}
 	
 	public List<InventoryStoreDrugIndent> listMainStoreIndent(Integer id, Integer mainStoreId, Integer subStoreId,
 	                                                          String name, Integer status, String fromDate, String toDate,
 	                                                          int min, int max) throws APIException {
-		return dao.listMainStoreIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate, min, max);
+		return inventoryDAO.listMainStoreIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate, min, max);
 	}
 	
 	public int countMainStoreIndent(Integer id, Integer mainStoreId, Integer subStoreId, String name, Integer status,
 	                                String fromDate, String toDate) throws APIException {
-		return dao.countMainStoreIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate);
+		return inventoryDAO.countMainStoreIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugIndent saveStoreDrugIndent(InventoryStoreDrugIndent storeDrugIndent) throws APIException {
-		return dao.saveStoreDrugIndent(storeDrugIndent);
+		return inventoryDAO.saveStoreDrugIndent(storeDrugIndent);
 	}
 	
 	public InventoryStoreDrugIndent getStoreDrugIndentById(Integer id) throws APIException {
-		return dao.getStoreDrugIndentById(id);
+		return inventoryDAO.getStoreDrugIndentById(id);
 	}
 	
 	/**
@@ -623,33 +623,33 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                      String indentName, String drugName,
 	                                                                      String fromDate, String toDate, int min, int max)
 	                                                                                                                       throws APIException {
-		return dao.listStoreDrugIndentDetail(storeId, categoryId, indentName, drugName, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreDrugIndentDetail(storeId, categoryId, indentName, drugName, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreDrugIndentDetail(Integer storeId, Integer categoryId, String indentName, String drugName,
 	                                      String fromDate, String toDate) throws APIException {
-		return dao.countStoreDrugIndentDetail(storeId, categoryId, indentName, drugName, fromDate, toDate);
+		return inventoryDAO.countStoreDrugIndentDetail(storeId, categoryId, indentName, drugName, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugIndentDetail saveStoreDrugIndentDetail(InventoryStoreDrugIndentDetail storeDrugIndentDetail)
 	                                                                                                                     throws APIException {
-		return dao.saveStoreDrugIndentDetail(storeDrugIndentDetail);
+		return inventoryDAO.saveStoreDrugIndentDetail(storeDrugIndentDetail);
 	}
 	
 	public InventoryStoreDrugIndentDetail getStoreDrugIndentDetailById(Integer id) throws APIException {
-		return dao.getStoreDrugIndentDetailById(id);
+		return inventoryDAO.getStoreDrugIndentDetailById(id);
 	}
 	
 	@Override
 	public List<InventoryStoreDrugIndentDetail> listStoreDrugIndentDetail(Integer indentId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listStoreDrugIndentDetail(indentId);
+		return inventoryDAO.listStoreDrugIndentDetail(indentId);
 	}
 	
 	@Override
 	public int checkExistDrugIndentDetail(Integer drugId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.checkExistDrugIndentDetail(drugId);
+		return inventoryDAO.checkExistDrugIndentDetail(drugId);
 	}
 	
 	/**
@@ -657,19 +657,19 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreDrugPatient> listStoreDrugPatient(Integer storeId, Integer receiptId, String name, String fromDate,
 	                                                            String toDate, int min, int max) throws APIException {
-		return dao.listStoreDrugPatient(storeId,receiptId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreDrugPatient(storeId,receiptId, name, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreDrugPatient(Integer storeId, String name, String fromDate, String toDate) throws APIException {
-		return dao.countStoreDrugPatient(storeId, name, fromDate, toDate);
+		return inventoryDAO.countStoreDrugPatient(storeId, name, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugPatient saveStoreDrugPatient(InventoryStoreDrugPatient bill) throws APIException {
-		return dao.saveStoreDrugPatient(bill);
+		return inventoryDAO.saveStoreDrugPatient(bill);
 	}
 	
 	public InventoryStoreDrugPatient getStoreDrugPatientById(Integer id) throws APIException {
-		return dao.getStoreDrugPatientById(id);
+		return inventoryDAO.getStoreDrugPatientById(id);
 	}
 	
 	/**
@@ -677,16 +677,16 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreDrugPatientDetail> listStoreDrugPatientDetail(Integer storeDrugPatientDetailId)
 	                                                                                                         throws APIException {
-		return dao.listStoreDrugPatientDetail(storeDrugPatientDetailId);
+		return inventoryDAO.listStoreDrugPatientDetail(storeDrugPatientDetailId);
 	}
 	
 	public InventoryStoreDrugPatientDetail saveStoreDrugPatientDetail(InventoryStoreDrugPatientDetail storeDrugPatientDetail)
 	                                                                                                                         throws APIException {
-		return dao.saveStoreDrugPatientDetail(storeDrugPatientDetail);
+		return inventoryDAO.saveStoreDrugPatientDetail(storeDrugPatientDetail);
 	}
 	
 	public InventoryStoreDrugPatientDetail getStoreDrugPatientDetailById(Integer id) throws APIException {
-		return dao.getStoreDrugPatientDetailById(id);
+		return inventoryDAO.getStoreDrugPatientDetailById(id);
 	}
 	
 	//change code
@@ -696,23 +696,23 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	
 	public List<InventoryStoreItem> listStoreItem(Integer storeId, Integer categoryId, String itemName, Integer reorderQty,
 	                                              int min, int max) throws APIException {
-		return dao.listStoreItem(storeId, categoryId, itemName, reorderQty, min, max);
+		return inventoryDAO.listStoreItem(storeId, categoryId, itemName, reorderQty, min, max);
 	}
 	
 	public int countStoreItem(Integer storeId, Integer categoryId, String itemName, Integer reorderQty) throws APIException {
-		return dao.countStoreItem(storeId, categoryId, itemName, reorderQty);
+		return inventoryDAO.countStoreItem(storeId, categoryId, itemName, reorderQty);
 	}
 	
 	public InventoryStoreItem getStoreItemById(Integer id) throws APIException {
-		return dao.getStoreItemById(id);
+		return inventoryDAO.getStoreItemById(id);
 	}
 	
 	public InventoryStoreItem getStoreItem(Integer storeId, Integer itemId, Integer specificationId) throws APIException {
-		return dao.getStoreItem(storeId, itemId, specificationId);
+		return inventoryDAO.getStoreItem(storeId, itemId, specificationId);
 	}
 	
 	public InventoryStoreItem saveStoreItem(InventoryStoreItem StoreItem) throws APIException {
-		return dao.saveStoreItem(StoreItem);
+		return inventoryDAO.saveStoreItem(StoreItem);
 	}
 	
 	/**
@@ -722,25 +722,25 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	public List<InventoryStoreItemTransaction> listStoreItemTransaction(Integer transactionType, Integer storeId,
 	                                                                    String description, String fromDate, String toDate,
 	                                                                    int min, int max) throws APIException {
-		return dao.listStoreItemTransaction(transactionType, storeId, description, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemTransaction(transactionType, storeId, description, fromDate, toDate, min, max);
 	}
 	
 	public InventoryStoreItemTransaction saveStoreItemTransaction(InventoryStoreItemTransaction storeTransaction)
 	                                                                                                             throws APIException {
-		return dao.saveStoreItemTransaction(storeTransaction);
+		return inventoryDAO.saveStoreItemTransaction(storeTransaction);
 	}
 	
 	public int countStoreItemTransaction(Integer transactionType, Integer storeId, String description, String fromDate,
 	                                     String toDate) throws APIException {
-		return dao.countStoreItemTransaction(transactionType, storeId, description, fromDate, toDate);
+		return inventoryDAO.countStoreItemTransaction(transactionType, storeId, description, fromDate, toDate);
 	}
 	
 	public InventoryStoreItemTransaction getStoreItemTransactionById(Integer id) throws APIException {
-		return dao.getStoreItemTransactionById(id);
+		return inventoryDAO.getStoreItemTransactionById(id);
 	}
 	
 	public InventoryStoreItemTransaction getStoreItemTransactionByParentId(Integer parentId) throws APIException {
-		return dao.getStoreItemTransactionByParentId(parentId);
+		return inventoryDAO.getStoreItemTransactionByParentId(parentId);
 	}
 	
 	/**
@@ -752,49 +752,49 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                                String specificationName,
 	                                                                                String fromDate, String toDate, int min,
 	                                                                                int max) throws APIException {
-		return dao.listStoreItemTransactionDetail(storeId, categoryId, itemName, specificationName, fromDate, toDate, min,
+		return inventoryDAO.listStoreItemTransactionDetail(storeId, categoryId, itemName, specificationName, fromDate, toDate, min,
 		    max);
 	}
 	
 	public InventoryStoreItemTransactionDetail saveStoreItemTransactionDetail(InventoryStoreItemTransactionDetail storeTransactionDetail)
 	                                                                                                                                     throws APIException {
-		return dao.saveStoreItemTransactionDetail(storeTransactionDetail);
+		return inventoryDAO.saveStoreItemTransactionDetail(storeTransactionDetail);
 	}
 	
 	public int countStoreItemTransactionDetail(Integer storeId, Integer categoryId, String itemName,
 	                                           String specificationName, String fromDate, String toDate) throws APIException {
-		return dao.countStoreItemTransactionDetail(storeId, categoryId, itemName, specificationName, fromDate, toDate);
+		return inventoryDAO.countStoreItemTransactionDetail(storeId, categoryId, itemName, specificationName, fromDate, toDate);
 	}
 	
 	public InventoryStoreItemTransactionDetail getStoreItemTransactionDetailById(Integer id) throws APIException {
-		return dao.getStoreItemTransactionDetailById(id);
+		return inventoryDAO.getStoreItemTransactionDetailById(id);
 	}
 	
 	public List<InventoryStoreItemTransactionDetail> listStoreItemTransactionDetail(Integer storeId, Integer itemId,
 	                                                                                Integer specificationId,
 	                                                                                boolean haveQuantity)
 	                                                                                                     throws APIException {
-		return dao.listStoreItemTransactionDetail(storeId, itemId, specificationId, haveQuantity);
+		return inventoryDAO.listStoreItemTransactionDetail(storeId, itemId, specificationId, haveQuantity);
 	}
 	
 	public List<InventoryStoreItemTransactionDetail> listStoreItemAvaiable(Integer storeId, Collection<Integer> items,
 	                                                                       Collection<Integer> specifications)
 	                                                                                                          throws APIException {
-		return dao.listStoreItemAvaiable(storeId, items, specifications);
+		return inventoryDAO.listStoreItemAvaiable(storeId, items, specifications);
 	}
 	
 	public Integer sumStoreItemCurrentQuantity(Integer storeId, Integer itemId, Integer specificationId) throws APIException {
-		return dao.sumStoreItemCurrentQuantity(storeId, itemId, specificationId);
+		return inventoryDAO.sumStoreItemCurrentQuantity(storeId, itemId, specificationId);
 	}
 	
 	public List<InventoryStoreItemTransactionDetail> listStoreItemTransactionDetail(Integer transactionId)
 	                                                                                                      throws APIException {
-		return dao.listStoreItemTransactionDetail(transactionId);
+		return inventoryDAO.listStoreItemTransactionDetail(transactionId);
 	}
 	//edited
 	public Integer countStoreItemViewStockBalance(Integer storeId, Integer categoryId, String itemName,String attribute, String fromDate,
 	                                              String toDate) throws APIException {
-		return dao.countStoreItemViewStockBalance(storeId, categoryId, itemName,attribute, fromDate, toDate);
+		return inventoryDAO.countStoreItemViewStockBalance(storeId, categoryId, itemName,attribute, fromDate, toDate);
 	}
 	//edited
 	public List<InventoryStoreItemTransactionDetail> listStoreItemViewStockBalance(Integer storeId, Integer categoryId,
@@ -802,19 +802,19 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                               String toDate, int min, int max)
 	                                                                                                             throws APIException {
 		//edited 
-		return dao.listStoreItemViewStockBalance(storeId, categoryId, itemName,attribute, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemViewStockBalance(storeId, categoryId, itemName,attribute, fromDate, toDate, min, max);
 	}
 	
 	public List<InventoryStoreItemTransactionDetail> listStoreItemTransactionDetail(Integer storeId, Integer itemId,
 	                                                                                Integer specificationId, int min, int max)
 	                                                                                                                          throws APIException {
-		return dao.listStoreItemTransactionDetail(storeId, itemId, specificationId, min, max);
+		return inventoryDAO.listStoreItemTransactionDetail(storeId, itemId, specificationId, min, max);
 	}
 	
 	@Override
 	public int checkExistItemTransactionDetail(Integer itemId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.checkExistItemTransactionDetail(itemId);
+		return inventoryDAO.checkExistItemTransactionDetail(itemId);
 	}
 	
 	/**
@@ -823,41 +823,41 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	
 	public List<InventoryStoreItemIndent> listStoreItemIndent(Integer StoreId, String name, String fromDate, String toDate,
 	                                                          int min, int max) throws APIException {
-		return dao.listStoreItemIndent(StoreId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemIndent(StoreId, name, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreItemIndent(Integer StoreId, String name, String fromDate, String toDate) throws APIException {
-		return dao.countStoreItemIndent(StoreId, name, fromDate, toDate);
+		return inventoryDAO.countStoreItemIndent(StoreId, name, fromDate, toDate);
 	}
 	
 	public List<InventoryStoreItemIndent> listSubStoreItemIndent(Integer storeId, String name, Integer status,
 	                                                             String fromDate, String toDate, int min, int max)
 	                                                                                                              throws APIException {
-		return dao.listSubStoreItemIndent(storeId, name, status, fromDate, toDate, min, max);
+		return inventoryDAO.listSubStoreItemIndent(storeId, name, status, fromDate, toDate, min, max);
 	}
 	
 	public int countSubStoreItemIndent(Integer storeId, String name, Integer status, String fromDate, String toDate)
 	                                                                                                                throws APIException {
-		return dao.countSubStoreItemIndent(storeId, name, status, fromDate, toDate);
+		return inventoryDAO.countSubStoreItemIndent(storeId, name, status, fromDate, toDate);
 	}
 	
 	public List<InventoryStoreItemIndent> listMainStoreItemIndent(Integer id, Integer mainStoreId, Integer subStoreId,
 	                                                              String name, Integer status, String fromDate,
 	                                                              String toDate, int min, int max) throws APIException {
-		return dao.listMainStoreItemIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate, min, max);
+		return inventoryDAO.listMainStoreItemIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate, min, max);
 	}
 	
 	public int countMainStoreItemIndent(Integer id, Integer mainStoreId, Integer subStoreId, String name, Integer status,
 	                                    String fromDate, String toDate) throws APIException {
-		return dao.countMainStoreItemIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate);
+		return inventoryDAO.countMainStoreItemIndent(id, mainStoreId, subStoreId, name, status, fromDate, toDate);
 	}
 	
 	public InventoryStoreItemIndent saveStoreItemIndent(InventoryStoreItemIndent storeItemIndent) throws APIException {
-		return dao.saveStoreItemIndent(storeItemIndent);
+		return inventoryDAO.saveStoreItemIndent(storeItemIndent);
 	}
 	
 	public InventoryStoreItemIndent getStoreItemIndentById(Integer id) throws APIException {
-		return dao.getStoreItemIndentById(id);
+		return inventoryDAO.getStoreItemIndentById(id);
 	}
 	
 	/**
@@ -868,31 +868,31 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	                                                                      String indentName, String itemName,
 	                                                                      String fromDate, String toDate, int min, int max)
 	                                                                                                                       throws APIException {
-		return dao.listStoreItemIndentDetail(storeId, categoryId, indentName, itemName, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemIndentDetail(storeId, categoryId, indentName, itemName, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreItemIndentDetail(Integer storeId, Integer categoryId, String indentName, String itemName,
 	                                      String fromDate, String toDate) throws APIException {
-		return dao.countStoreItemIndentDetail(storeId, categoryId, indentName, itemName, fromDate, toDate);
+		return inventoryDAO.countStoreItemIndentDetail(storeId, categoryId, indentName, itemName, fromDate, toDate);
 	}
 	
 	public List<InventoryStoreItemIndentDetail> listStoreItemIndentDetail(Integer indentId) throws APIException {
-		return dao.listStoreItemIndentDetail(indentId);
+		return inventoryDAO.listStoreItemIndentDetail(indentId);
 	}
 	
 	public InventoryStoreItemIndentDetail saveStoreItemIndentDetail(InventoryStoreItemIndentDetail storeItemIndentDetail)
 	                                                                                                                     throws APIException {
-		return dao.saveStoreItemIndentDetail(storeItemIndentDetail);
+		return inventoryDAO.saveStoreItemIndentDetail(storeItemIndentDetail);
 	}
 	
 	public InventoryStoreItemIndentDetail getStoreItemIndentDetailById(Integer id) throws APIException {
-		return dao.getStoreItemIndentDetailById(id);
+		return inventoryDAO.getStoreItemIndentDetailById(id);
 	}
 	
 	@Override
 	public int checkExistItemIndentDetail(Integer itemId) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.checkExistItemIndentDetail(itemId);
+		return inventoryDAO.checkExistItemIndentDetail(itemId);
 	}
 	
 	/**
@@ -900,19 +900,19 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreItemAccount> listStoreItemAccount(Integer storeId, String name, String fromDate,
 	                                                            String toDate, int min, int max) throws APIException {
-		return dao.listStoreItemAccount(storeId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemAccount(storeId, name, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreItemAccount(Integer storeId, String name, String fromDate, String toDate) throws APIException {
-		return dao.countStoreItemAccount(storeId, name, fromDate, toDate);
+		return inventoryDAO.countStoreItemAccount(storeId, name, fromDate, toDate);
 	}
 	
 	public InventoryStoreItemAccount saveStoreItemAccount(InventoryStoreItemAccount issue) throws APIException {
-		return dao.saveStoreItemAccount(issue);
+		return inventoryDAO.saveStoreItemAccount(issue);
 	}
 	
 	public InventoryStoreItemAccount getStoreItemAccountById(Integer id) throws APIException {
-		return dao.getStoreItemAccountById(id);
+		return inventoryDAO.getStoreItemAccountById(id);
 	}
 	
 	/**
@@ -920,16 +920,16 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreItemAccountDetail> listStoreItemAccountDetail(Integer storeItemAccountDetailId)
 	                                                                                                         throws APIException {
-		return dao.listStoreItemAccountDetail(storeItemAccountDetailId);
+		return inventoryDAO.listStoreItemAccountDetail(storeItemAccountDetailId);
 	}
 	
 	public InventoryStoreItemAccountDetail saveStoreItemAccountDetail(InventoryStoreItemAccountDetail storeItemAccountDetail)
 	                                                                                                                         throws APIException {
-		return dao.saveStoreItemAccountDetail(storeItemAccountDetail);
+		return inventoryDAO.saveStoreItemAccountDetail(storeItemAccountDetail);
 	}
 	
 	public InventoryStoreItemAccountDetail getStoreItemAccountDetailById(Integer id) throws APIException {
-		return dao.getStoreItemAccountDetailById(id);
+		return inventoryDAO.getStoreItemAccountDetailById(id);
 	}
 	
 	/**
@@ -937,19 +937,19 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreDrugAccount> listStoreDrugAccount(Integer storeId, String name, String fromDate,
 	                                                            String toDate, int min, int max) throws APIException {
-		return dao.listStoreDrugAccount(storeId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreDrugAccount(storeId, name, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreDrugAccount(Integer storeId, String name, String fromDate, String toDate) throws APIException {
-		return dao.countStoreDrugAccount(storeId, name, fromDate, toDate);
+		return inventoryDAO.countStoreDrugAccount(storeId, name, fromDate, toDate);
 	}
 	
 	public InventoryStoreDrugAccount saveStoreDrugAccount(InventoryStoreDrugAccount issue) throws APIException {
-		return dao.saveStoreDrugAccount(issue);
+		return inventoryDAO.saveStoreDrugAccount(issue);
 	}
 	
 	public InventoryStoreDrugAccount getStoreDrugAccountById(Integer id) throws APIException {
-		return dao.getStoreDrugAccountById(id);
+		return inventoryDAO.getStoreDrugAccountById(id);
 	}
 	
 	/**
@@ -957,43 +957,43 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreDrugAccountDetail> listStoreDrugAccountDetail(Integer storeDrugAccountDetailId)
 	                                                                                                         throws APIException {
-		return dao.listStoreDrugAccountDetail(storeDrugAccountDetailId);
+		return inventoryDAO.listStoreDrugAccountDetail(storeDrugAccountDetailId);
 	}
 	
 	public InventoryStoreDrugAccountDetail saveStoreDrugAccountDetail(InventoryStoreDrugAccountDetail storeDrugAccountDetail)
 	                                                                                                                         throws APIException {
-		return dao.saveStoreDrugAccountDetail(storeDrugAccountDetail);
+		return inventoryDAO.saveStoreDrugAccountDetail(storeDrugAccountDetail);
 	}
 	
 	public InventoryStoreDrugAccountDetail getStoreDrugAccountDetailById(Integer id) throws APIException {
-		return dao.getStoreDrugAccountDetailById(id);
+		return inventoryDAO.getStoreDrugAccountDetailById(id);
 	}
 	
 	// ghanshyam 15-june-2013 New Requirement #1636 User is able to see and dispense drugs in patient queue for issuing drugs, as ordered from dashboard
 	public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page) throws APIException {
-		return dao.searchListOfPatient(date,searchKey,page);
+		return inventoryDAO.searchListOfPatient(date,searchKey,page);
 	}
         
         // to work with size Selector
         public List<PatientSearch> searchListOfPatient(Date date, String searchKey,int page,int pgSize) throws APIException {
-		return dao.searchListOfPatient(date,searchKey,page,pgSize);
+		return inventoryDAO.searchListOfPatient(date,searchKey,page,pgSize);
 	}
 	
         //to work with size Selector
 	public int countSearchListOfPatient(Date date, String searchKey,int page) throws APIException {
-		return dao.countSearchListOfPatient(date,searchKey,page);
+		return inventoryDAO.countSearchListOfPatient(date,searchKey,page);
 	}
                 
 	public List<OpdDrugOrder> listOfOrder(Integer patientId,Date date) throws APIException {
-		return dao.listOfOrder(patientId,date);
+		return inventoryDAO.listOfOrder(patientId,date);
 	}
 	
 	public List<OpdDrugOrder> listOfDrugOrder(Integer patientId, Integer encounterId) throws APIException {
-		return dao.listOfDrugOrder(patientId,encounterId);
+		return inventoryDAO.listOfDrugOrder(patientId,encounterId);
 	}
 	
 	public OpdDrugOrder getOpdDrugOrder(Integer patientId,Integer encounterId,Integer inventoryDrugId,Integer formulationId) throws APIException {
-		return dao.getOpdDrugOrder(patientId,encounterId,inventoryDrugId,formulationId);
+		return inventoryDAO.getOpdDrugOrder(patientId,encounterId,inventoryDrugId,formulationId);
 	}
 
 	/**
@@ -1001,19 +1001,19 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreItemPatient> listStoreItemPatient(Integer storeId,Integer receiptId,  String name, String fromDate,
 	                                                            String toDate, int min, int max) throws APIException {
-		return dao.listStoreItemPatient(storeId,receiptId, name, fromDate, toDate, min, max);
+		return inventoryDAO.listStoreItemPatient(storeId,receiptId, name, fromDate, toDate, min, max);
 	}
 	
 	public int countStoreItemPatient(Integer storeId, String name, String fromDate, String toDate) throws APIException {
-		return dao.countStoreItemPatient(storeId, name, fromDate, toDate);
+		return inventoryDAO.countStoreItemPatient(storeId, name, fromDate, toDate);
 	}
 	
 	public InventoryStoreItemPatient saveStoreItemPatient(InventoryStoreItemPatient bill) throws APIException {
-		return dao.saveStoreItemPatient(bill);
+		return inventoryDAO.saveStoreItemPatient(bill);
 	}
 	
 	public InventoryStoreItemPatient getStoreItemPatientById(Integer id) throws APIException {
-		return dao.getStoreItemPatientById(id);
+		return inventoryDAO.getStoreItemPatientById(id);
 	}
 	
 	/**
@@ -1021,58 +1021,58 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	 */
 	public List<InventoryStoreItemPatientDetail> listStoreItemPatientDetail(Integer storeItemPatientDetailId)
 	                                                                                                         throws APIException {
-		return dao.listStoreItemPatientDetail(storeItemPatientDetailId);
+		return inventoryDAO.listStoreItemPatientDetail(storeItemPatientDetailId);
 	}
 	
 	public InventoryStoreItemPatientDetail saveStoreItemPatientDetail(InventoryStoreItemPatientDetail storeItemPatientDetail)
 	                                                                                                                         throws APIException {
-		return dao.saveStoreItemPatientDetail(storeItemPatientDetail);
+		return inventoryDAO.saveStoreItemPatientDetail(storeItemPatientDetail);
 	}
 	
 	public InventoryStoreItemPatientDetail getStoreItemPatientDetailById(Integer id) throws APIException {
-		return dao.getStoreItemPatientDetailById(id);
+		return inventoryDAO.getStoreItemPatientDetailById(id);
 	}
 
 	
 	public List<OpdDrugOrder> listOfNotDispensedOrder(Integer patientId,Date date, Encounter encounterId) throws APIException {
-		return dao.listOfNotDispensedOrder(patientId,date,encounterId);
+		return inventoryDAO.listOfNotDispensedOrder(patientId,date,encounterId);
 	}
 
 	@Override
 	public InventoryStoreRoleRelation saveStores(InventoryStoreRoleRelation role)
 			throws APIException {
-		return dao.saveStores(role);
+		return inventoryDAO.saveStores(role);
 	}
 
 	@Override
 	public List<InventoryStoreRoleRelation> listOfRoleRelation(Integer id,String role) throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listOfRoleRelation(id,role);
+		return inventoryDAO.listOfRoleRelation(id,role);
 	}
 
 	@Override
 	public InventoryStoreRoleRelation getStoreRoleById(Integer id) {
 		// TODO Auto-generated method stub
-		return dao.getStoreRoleById(id);
+		return inventoryDAO.getStoreRoleById(id);
 	}
 
 	@Override
 	public InventoryStoreRoleRelation getStoreRoleByName(String name) {
 		// TODO Auto-generated method stub
-		return dao.getStoreRoleByName(name);
+		return inventoryDAO.getStoreRoleByName(name);
 	}
 
 	@Override
 	public List<InventoryStoreRoleRelation> listInventoryStoreRole()
 			throws APIException {
 		// TODO Auto-generated method stub
-		return dao.listInventoryStoreRole();
+		return inventoryDAO.listInventoryStoreRole();
 	}
 
 	@Override
 	public void deleteStoreRole(InventoryStoreRoleRelation rl)
 			throws APIException {
-		dao.deleteStoreRole(rl);
+		inventoryDAO.deleteStoreRole(rl);
 		
 	}
 
@@ -1081,13 +1081,13 @@ public class InventoryServiceImpl extends BaseOpenmrsService implements Inventor
 	@Override
 	public List<InventoryStoreRoleRelation> listOfRoleRelationStore(Integer id)
 			throws APIException {
-		return dao.listOfRoleRelationStore(id);
+		return inventoryDAO.listOfRoleRelationStore(id);
 		
 	}
 
 	@Override
 	public List<ToxoidModel> getTetanusToxoidTransactions(int patientId) {
-		return dao.getTetanusToxoidTransactionsByPatient(patientId);
+		return inventoryDAO.getTetanusToxoidTransactionsByPatient(patientId);
 	}
 
 
